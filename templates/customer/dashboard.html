@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+<!-------------------------Home------------------->
+<section id="home" class="home">
+    <div class="content">
+        <h1>Best Dairy Products In Your Town</h1>
+        <p>Order some dairy products,<br> from our Jagadamba Dairy.</p>
+        <div class="home-btn">
+        </div>
+
+    </div>
+</section>
+
+<!-----------------------product-------------------->
+<div class="col-lg-12 container-fluid" id="product">
+    <h1 class="title">Products</h1>
+        <div class="row justify-content-center"> 
+            
+            {% for product in products %}
+            <div class="col-md-3 justify-content-center prouctitem"style="margin:2rem;   border-style: solid;
+            border-width: 1px; border-radius:2rem;">
+                <div class="row">
+                <h6 class="desc"><b>{{product.product_desc}}</b></h6> 
+                </div>
+                <img width="350" height="200" class="img-fluid prodimg" src="{% static 'assets/' %}{{product.product_image}}">
+                <div class="container" style="justify-content:center">
+                    <h3><b>{{product.product_name}}</b></h3>
+
+                <div class="price">Rs:{{product.product_price}}</div>
+                {% if request.session.customer_id %}
+                <a class="btn btn-primary" href="/billpage/buy/{{product.product_id}}"
+                title="Buy">Buy</a>                        {% else %}
+                        <a class="btn btn-primary" href="/login">Buy</a>
+                        {% endif %}
+            </div>
+        </div>
+
+            {% endfor %}
+        </div>
+</div>
+<!------------------------contact us--------------->
+<footer class="contact" id="contact">
+    <div class="cake-contact">
+        <div class="cake-contact-row">
+            <div class="cake-contact-col">
+                <img src="{% static 'img/shop.jpg' %}" alt="img" class="images">
+            </div>
+            <div class="cake-contact-col">
+                <h1>Contact Us</h1>
+                <div class="social">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest"></i>
+                </div>
+                <p>Bijayanagar, Attariya, Godawari-01, Kailali<br>nirajbhatta108@gmailcom, 9814647140</p>
+
+            </div>
+        </div>
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d59017.853243965386!2d72.74254603725106!3d22.405835692956025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1scake%20shop!5e0!3m2!1sen!2sin!4v1628243773361!5m2!1sen!2sin" 
+                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+    </div>
+</footer>
+{% endblock %}

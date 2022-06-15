@@ -1,0 +1,44 @@
+{% extends "lr.html" %}
+{% block content %}
+<!--add user-->
+<div class="col-lg-8  registration" >
+    <h2>Login Here</h2>
+    
+    <hr/>
+<!-- form to create user-->
+    <form  action="/login" method="POST" >
+    {% csrf_token %}
+    <!-- fullname -->
+    <div class="row">
+        <div class="col-lg-6 input-group md-form form-sm">
+            <div class="input-group-append"   >
+                <span class="icon"><i class="fa fa-user mt-2 p-2"></i></span>
+                <input type="text" name="username" id="user_name" class="form-control mt-2" placeholder="User Name here" required>
+            </div>
+        </div>
+        <div class="col-lg-6 input-group md-form form-sm ">
+            <div class="input-group-append">
+                <span class="icon"><i class="fa fa-lock" aria-hidden="true"  style="margin-left:10px; margin-top:10px;"></i></span>
+                <input type="Password" name="password" id="user_pass"  class="form-control mt-2" placeholder="Password here" required>
+            </div>
+        </div>
+    </div>
+  
+    <!--Buttons -->
+    <div class="row d-flex justify-content-center ">
+    <div class="col-sm-6 btn-group m-3">
+        <button  type="submit" class="btn btn-outline-success ml-5"><b>Login</b></button>
+    </div>
+</div>
+    </form>
+    <div class="row d-flex justify-content-center ">
+
+    <div class="col-sm-6 btn-group m-3">
+    <a href="/register"> 
+        <button class="btn btn-outline-success ml-5" style="padding-left:6rem; padding-right:6rem" >Register</button>        
+    </a>
+    </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+           Your Profile
+        </title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/lr.css' %}">
+        <script src="{% static 'js/validation.js'%}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" >
+        <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+            </head>
+
+        <body>
+            <header>
+                <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %} ">
+
+                <a href="/" class="logo"><img src="{% static 'img/logo.png' %}"></a>
+        
+                <nav class="navigate">
+                    <ul>
+                        <li><a href="/" class="active">Home</a></li>
+                        <li><a href="#contact">Contact</a></li>
+        
+                        {% if request.session.customer_id %}
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/billpage/yourorder">Your Orders</a></li>
+        
+                        <li><a href="/signout">Logout</a></li>
+        
+                                {% else %}
+                                <li><a href="/login">Login/Register</a></li>
+                               
+                                {% endif %}
+                    </ul>
+                </nav>
+                <div id="menu"><i class="fas fa-bars"></i></div>
+            </header>
+            <div class="container-fluid" style="margin-top:10rem;">
+                <div class="registration-section">
+                    <div class="col-lg-6 main">
+                    <div class="registration-form">
+                                                
+                        
+                            <h2>Edit Information</h2>
+                        {% for user in users %}
+                        <form action="/customer_update/{{user.customer_id}}" class="registration"  method="POST" onsubmit="validateRegistrationForm(event)">
+                            {% csrf_token %}
+                            <input type="text" name="username" id="customer_username" class="text-box" value="{{user.username}}" required>
+                            <input type="text" name="customer_phone" id="customer_phone" class="text-box" value="{{user.customer_phone}}" required>
+                            <input type="email" name="customer_email" id="customer_email" class="text-box" value="{{user.customer_email}}" required>
+                            <input type="password" name="password" id="customer_password"  class="text-box" value="{{user.password}}" required>
+                            <input type="submit" name="submit" class="send-btn" value="Update">                            
+                        </form>
+                        {% endfor %}
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+             <!-------------------------jquery------------------------------>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#menu').click(function () {
+                $(this).toggleClass('fas fa-times');
+                $('.navigate').toggleClass('nav-toggle');
+            });
+
+            $(window).on('scroll load',function()
+            {
+                $('#menu').removeClass('fas fa-times');
+                $('.navigate').removeClass('nav-toggle');
+            });
+
+            $('.service .cake-list .btn1').click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+
+                let src = $(this).attr('data-src');
+                $('#cake-img').attr('src', src);
+            });
+
+        });
+
+    </script>
+            
+        </body>
+        
+</html>

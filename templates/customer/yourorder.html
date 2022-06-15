@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+<div class="col-lg-11 container-fluid" id="product">
+    
+    <h1> <br>Your orders</h1>
+        <div class="row1 justify-content-center"> 
+            {% for bill in bills %}
+            <div class="col-md-3 prouctitem">
+                <img class="img-fluid pimg" src="{% static 'assets/' %}{{bill.product_image}}">
+                <p >Product name : {{bill.product_name}}</p>
+                   <p>Amount : {{bill.product_qty}}</p>
+                   <p> Total price : {{bill.tot_price}}</p>
+                   <p>Deliver Location : {{bill.location}}</p>
+                    <a href="/billpage/productedit/{{bill.buyproduct_id}}" style="color:rgb(80, 214, 255)"><i class="fa fa-pencil-square fa-lg" style="color:rgb(129, 255, 56)"></i></a>
+                    |
+                    <a href="/billpage/productdelete/{{bill.buyproduct_id}}" style="color:rgb(80, 214, 255)"><i class="fa fa-trash-o ml-2 fa-lg" style="color:red !important">Delete</i></a>
+        </div>
+            {% endfor %}
+        </div>
+</div>
+</div>
+                
+{% endblock %}
